@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Flying")
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             StartCoroutine(FlyingPlayer());
         }
     }
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (rb.position.y < 20)
         {
-            rb.MovePosition(rb.position + new Vector3(0, 4f, 6)*Time.deltaTime);
+            rb.MovePosition(rb.position + new Vector3(0, 3f, 6)*Time.deltaTime);
             //transform.Translate(Vector3.up * flyspeed * Time.deltaTime);
             //transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
         Flying = true;
         wings.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(30f);
         this.gameObject.GetComponent<Animator>().enabled = true;
         wings.SetActive(false);
         pRB.isKinematic = false;

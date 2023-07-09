@@ -26,6 +26,10 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Quit();
+        }
         if (PlayerTransform.position.z-SaveZone > (spawnZ - amnTileOnScreen * tileLength))
         {
             SpawnTile();
@@ -59,5 +63,9 @@ public class TileManager : MonoBehaviour
         lastPrefabIndex = randomIndex;
         return randomIndex;
         
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

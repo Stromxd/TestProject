@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//SUBSCRIBE TO VIN CODES FOR MORE FREE SCRIPTS IN FUTURE VIDEOS :)
-
 public class Coin : MonoBehaviour
 {
-
     public Transform playerTransform;
     public float moveSpeed = 17f;
 

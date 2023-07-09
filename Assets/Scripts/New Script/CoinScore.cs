@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class CoinScore : MonoBehaviour
 {
     public int score = 0;
     public Text scoreText;
     public bool DoubleScore = false;
-    public GameObject player;
-    public Rigidbody rb;
+    public AudioSource CoinAudio;
     
     
     private void OnTriggerEnter(Collider other)
@@ -18,6 +16,7 @@ public class CoinScore : MonoBehaviour
         if (other.gameObject.tag == "Fruit" && DoubleScore == false)
         {
             //Add count or give points etc etc.
+            CoinAudio.Play();
             score = score + 1;
             scoreText.text = ((int)score).ToString();
             Destroy(other.gameObject);
@@ -25,10 +24,13 @@ public class CoinScore : MonoBehaviour
         if (other.gameObject.tag == "DoubleScore" || DoubleScore == true)
         {
             DoubleScore = true;
-            Destroy(other.gameObject);
+            CoinAudio.Play();
+            //Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             StartCoroutine(ActivateDoubleCoin());
             if (other.gameObject.tag == "Fruit" && DoubleScore == true)
             {
+                CoinAudio.Play();
                 score = score + 2;
                 scoreText.text = ((int)score).ToString();
             }
@@ -36,12 +38,7 @@ public class CoinScore : MonoBehaviour
     }
     IEnumerator ActivateDoubleCoin()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(15f);
         DoubleScore = false;
-    }
-    IEnumerator ActivateFlying()
-    {
-        yield return new WaitForSeconds(4f);
-        //Flying = false;
     }
 }
